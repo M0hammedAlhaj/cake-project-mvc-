@@ -31,10 +31,6 @@ The **E-Commerce Management System (ECM)** is a web-based application designed t
   - MySQL (or any relational database supported by Spring Data JPA)
 - **Build Tool**:
   - Maven
-- **Other Tools**:
-  - Lombok (for reducing boilerplate code)
-  - JUnit (for unit testing)
-  - Git (for version control)
 
 ---
 
