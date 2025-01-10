@@ -37,6 +37,9 @@
                     <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">Login</a>
                 </li>
                 <li class="nav-item active">
+                    <a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/admin}" href="#">Admin Page</a>
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">Logout</a>
                 </li>
                 <li class="nav-item active">

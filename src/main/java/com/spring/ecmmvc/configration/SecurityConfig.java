@@ -1,6 +1,7 @@
 package com.spring.ecmmvc.configration;
 
 import com.spring.ecmmvc.service.CustomUserDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,8 +16,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    private CustomUserDetailService customUserDetailService;
+    private final CustomUserDetailService customUserDetailService;
 
+    @Autowired
     public SecurityConfig(CustomUserDetailService customUserDetailService) {
         this.customUserDetailService = customUserDetailService;
     }

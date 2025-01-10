@@ -3,6 +3,8 @@ package com.spring.ecmmvc.service;
 import com.spring.ecmmvc.dao.UserDao;
 import com.spring.ecmmvc.model.CustomUserDetail;
 import com.spring.ecmmvc.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,29 +19,28 @@ import java.util.Optional;
 @Service
 public class CustomUserDetailService implements UserDetailsService {
 
-    private final UserDao userDao;
+    private final UserService userService;
 
     /**
      * Constructor for CustomUserDetailService.
      *
-     * @param userDao The DAO for accessing user data.
+     * @param userService The DAO for accessing user data.
      */
-    public CustomUserDetailService(UserDao userDao) {
-        this.userDao = userDao;
+    @Autowired
+    public CustomUserDetailService(@Lazy UserService userService) {
+        this.userService = userService;
     }
 
     /**
      * Loads user details by the provided username (email).
      *
-     * @param username The email address of the user to load.
+     * @param email The email address of the user to load.
      * @return The user details for the specified username.
      * @throws UsernameNotFoundException If the user is not found.
      */
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userDao.findUserByEmail(username);
-        user.orElseThrow(() -> new UsernameNotFoundException(username));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        return user.map(CustomUserDetail::new).get();
+        return new CustomUserDetail(userService.findUserByEmail(email));
     }
 }
