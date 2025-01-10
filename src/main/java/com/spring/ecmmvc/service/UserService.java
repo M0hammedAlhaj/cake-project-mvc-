@@ -49,4 +49,5 @@ public class UserService {
     public User findUserByEmail(String email) {
         return userDao.findUserByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
     }
+
 }
