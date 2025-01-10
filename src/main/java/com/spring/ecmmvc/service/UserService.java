@@ -6,6 +6,8 @@ import com.spring.ecmmvc.model.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * UserService provides business logic for managing users, including registration
  * and retrieval of user details.
@@ -48,6 +50,10 @@ public class UserService {
      */
     public User findUserByEmail(String email) {
         return userDao.findUserByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public List<User> findAllUsers() {
+        return userDao.findAll();
     }
 
 }

@@ -5,6 +5,7 @@ import com.spring.ecmmvc.model.CartProductId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -29,4 +30,7 @@ public interface CartProductDao extends JpaRepository<CartProduct, CartProductId
      * @return A set of cart products associated with the specified cart ID.
      */
     Set<CartProduct> getAllByCartId(int cartId);
+
+    Optional<CartProduct> findCartProductsByCartIdAndProductId(int cartId, int productId);
+
 }

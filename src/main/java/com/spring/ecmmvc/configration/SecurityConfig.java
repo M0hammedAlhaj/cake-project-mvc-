@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/doLogin")
-                        .defaultSuccessUrl("/index",true)
+                        .defaultSuccessUrl("/index", true)
                         .usernameParameter("email")
                         .passwordParameter("password")
                         .permitAll())
@@ -61,11 +61,6 @@ public class SecurityConfig {
         authProvider.setUserDetailsService(customUserDetailService);
         authProvider.setPasswordEncoder(bCryptPasswordEncoder());
         return authProvider;
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
     }
 
 }

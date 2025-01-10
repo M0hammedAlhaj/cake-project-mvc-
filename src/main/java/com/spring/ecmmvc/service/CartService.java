@@ -28,14 +28,15 @@ public class CartService {
     /**
      * Constructor for CartService.
      *
-     * @param productService      Service for managing product-related operations.
-     * @param cartProductService  Service for managing cart-product relationships.
-     * @param cartDao             DAO for accessing cart data.
-     * @param cartProductDao      DAO for accessing cart-product data.
+     * @param productService     Service for managing product-related operations.
+     * @param cartProductService Service for managing cart-product relationships.
+     * @param cartDao            DAO for accessing cart data.
+     * @param cartProductDao     DAO for accessing cart-product data.
      */
     @Autowired
     public CartService(ProductService productService,
-                       CartProductService cartProductService, CartDao cartDao, CartProductDao cartProductDao) {
+                       CartProductService cartProductService,
+                       CartDao cartDao, CartProductDao cartProductDao) {
         this.productService = productService;
         this.cartProductService = cartProductService;
         this.cartDao = cartDao;
@@ -73,21 +74,23 @@ public class CartService {
      * Adds a product to the cart by its ID.
      *
      * @param productId The ID of the product to add.
-     * @param idCart    The ID of the cart.
+     * @param cartId    The ID of the cart.
      */
     @Transactional
-    public void addProductByIdToCart(int productId, int idCart) {
-        CartProductId cartProductId = new CartProductId(idCart, productId);
+    public void addProductByIdToCart(int cartId,int productId) {
 
-        if (cartProductService.productExist(cartProductId)) {
-            cartProductService.incrementProductQuantity(cartProductId);
+        Cart cart = getCartById(cartId);
+        Product product = productService.getProductById(productId);
+        if (cart.getProducts().contains(product)) {
+            cartProductService.incrementProductQuantity(cartId,productId);
+
         } else {
-            Product product = productService.getProductById(productId);
-            Cart cart = getCartById(idCart);
             cart.getProducts().add(product);
             cartDao.save(cart);
-            cartProductService.incrementProductQuantity(cartProductId);
+            cartProductService.incrementProductQuantity(cartId,productId);
+
         }
+//        }
     }
 
     /**

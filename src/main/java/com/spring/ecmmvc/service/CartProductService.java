@@ -38,10 +38,12 @@ public class CartProductService {
     /**
      * Increments the quantity of a product in the cart.
      *
-     * @param cartProductId The composite key (cart ID and product ID) identifying the cart-product relationship.
+     * @param cartId    The ID of the cart.
+     * @param productId The ID of the product to increment.
+     * @throws RuntimeException If the product is not found in the cart.
      */
-    public void incrementProductQuantity(CartProductId cartProductId) {
-        CartProduct cartProduct = cartProductDao.findById(cartProductId)
+    public void incrementProductQuantity(int cartId, int productId) {
+        CartProduct cartProduct = cartProductDao.findCartProductsByCartIdAndProductId(cartId, productId)
                 .orElseThrow(() -> new RuntimeException("Product not found in Cart"));
         cartProduct.setQuantity(cartProduct.getQuantity() + 1);
         cartProductDao.save(cartProduct);
