@@ -77,20 +77,17 @@ public class CartService {
      * @param cartId    The ID of the cart.
      */
     @Transactional
-    public void addProductByIdToCart(int cartId,int productId) {
+    public void addProductByIdToCart(int productId, int cartId) {
 
         Cart cart = getCartById(cartId);
         Product product = productService.getProductById(productId);
         if (cart.getProducts().contains(product)) {
-            cartProductService.incrementProductQuantity(cartId,productId);
-
+            cartProductService.incrementProductQuantity(cartId, productId);
         } else {
             cart.getProducts().add(product);
             cartDao.save(cart);
-            cartProductService.incrementProductQuantity(cartId,productId);
 
         }
-//        }
     }
 
     /**
@@ -123,4 +120,5 @@ public class CartService {
         System.out.println(product.getPrice().multiply(new BigDecimal(cartProduct.getQuantity())));
         return product.getPrice().multiply(new BigDecimal(cartProduct.getQuantity()));
     }
+
 }

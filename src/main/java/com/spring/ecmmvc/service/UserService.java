@@ -37,7 +37,7 @@ public class UserService {
      */
     public User registerUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.cart = new Cart();
+        user.setCart(new Cart());
         return userDao.save(user);
     }
 
@@ -55,5 +55,6 @@ public class UserService {
     public List<User> findAllUsers() {
         return userDao.findAll();
     }
+
 
 }

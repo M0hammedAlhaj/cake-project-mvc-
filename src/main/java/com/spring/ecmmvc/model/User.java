@@ -3,6 +3,7 @@ package com.spring.ecmmvc.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
 /**
@@ -19,13 +20,13 @@ public class User {
     private Integer userId;
 
     @Column(nullable = false)
-    public String firstName;
+    private String firstName;
 
-    public String lastName;
+    private String lastName;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "idCart")
-    public Cart cart;
+    private Cart cart;
 
     @Email
     private String email;
@@ -142,5 +143,21 @@ public class User {
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 '}';
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

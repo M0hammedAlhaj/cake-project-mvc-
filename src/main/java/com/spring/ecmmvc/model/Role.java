@@ -2,7 +2,6 @@ package com.spring.ecmmvc.model;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
-import java.io.Serializable;
 
 /**
  * Role represents a user role in the system, which implements the {@link GrantedAuthority} interface
@@ -27,5 +26,13 @@ public class Role implements GrantedAuthority {
     @Override
     public String getAuthority() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "roleId=" + roleId +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

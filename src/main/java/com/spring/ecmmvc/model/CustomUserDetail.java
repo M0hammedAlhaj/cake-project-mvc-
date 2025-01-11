@@ -9,6 +9,7 @@ import java.util.Collection;
  * CustomUserDetail is a custom implementation of the {@link UserDetails} interface,
  * which provides user-specific data for authentication and authorization purposes.
  */
+
 public class CustomUserDetail implements UserDetails {
 
     private User user;
@@ -18,6 +19,8 @@ public class CustomUserDetail implements UserDetails {
      *
      * @param user The user object containing user details.
      */
+
+
     public CustomUserDetail(User user) {
         this.user = user;
     }

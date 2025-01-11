@@ -21,4 +21,6 @@ public interface UserDao extends JpaRepository<User, Integer> {
      * @return An optional containing the user if found, otherwise empty.
      */
     Optional<User> findUserByEmail(String username);
+
+
 }

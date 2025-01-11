@@ -20,8 +20,8 @@ public class ProductService {
     /**
      * Constructor for ProductService.
      *
-     * @param productDao          The DAO for accessing product data.
-     * @param cartProductService  The service for managing cart-product relationships.
+     * @param productDao         The DAO for accessing product data.
+     * @param cartProductService The service for managing cart-product relationships.
      */
     public ProductService(ProductDao productDao, CartProductService cartProductService) {
         this.productDao = productDao;
@@ -66,7 +66,7 @@ public class ProductService {
      * @throws RuntimeException If the product is not found.
      */
     public Product getProductById(int id) {
-        return productDao.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+        return productDao.findById(id).orElseThrow(() -> new RuntimeException("Product Not found By Id " + id));
     }
 
     /**

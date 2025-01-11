@@ -1,7 +1,9 @@
 package com.spring.ecmmvc.model;
 
 import jakarta.persistence.*;
+
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * CartProduct represents the relationship between a cart and a product,
@@ -89,5 +91,18 @@ public class CartProduct implements Serializable {
                 ", productId=" + productId +
                 ", quantity=" + quantity +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CartProduct that = (CartProduct) o;
+        return cartId == that.cartId && productId == that.productId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cartId, productId);
     }
 }

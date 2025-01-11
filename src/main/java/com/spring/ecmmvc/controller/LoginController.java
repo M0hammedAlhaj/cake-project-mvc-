@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * LoginController handles user authentication-related operations, such as displaying
+ * LoginController handles user-authentication-related operations, such as displaying
  * the login page, registration page, and processing user registration.
  */
 @Controller

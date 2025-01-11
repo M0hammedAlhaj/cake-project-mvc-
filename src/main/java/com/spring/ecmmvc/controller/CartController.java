@@ -34,44 +34,44 @@ public class CartController {
     /**
      * Displays the cart page for the authenticated user.
      *
-     * @param model        The model to add attributes for the view.
-     * @param userDetails  The authenticated user's details.
+     * @param model       The model to add attributes for the view.
+     * @param userDetails The authenticated user's details.
      * @return The view name for the cart page.
      */
     @GetMapping("/cart")
     public String cartPage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         User user = userService.findUserByEmail(userDetails.getUsername());
-        model.addAttribute("cart", cartService.getCartById(user.cart.getIdCart()));
-        model.addAttribute("price", cartService.calculatePriceOfItemById(user.cart.getIdCart()));
+        model.addAttribute("cart", cartService.getCartById(user.getCart().getIdCart()));
+        model.addAttribute("price", cartService.calculatePriceOfItemById(user.getCart().getIdCart()));
         return "cart";
     }
 
     /**
      * Adds a product to the authenticated user's cart.
      *
-     * @param id           The ID of the product to add to the cart.
-     * @param model        The model to add attributes for the view.
-     * @param userDetails  The authenticated user's details.
+     * @param id          The ID of the product to add to the cart.
+     * @param model       The model to add attributes for the view.
+     * @param userDetails The authenticated user's details.
      * @return Redirects to the shop page.
      */
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable int id, Model model, @AuthenticationPrincipal UserDetails userDetails) {
         User user = userService.findUserByEmail(userDetails.getUsername());
-        cartService.addProductByIdToCart(id, user.cart.getIdCart());
+        cartService.addProductByIdToCart(id, user.getCart().getIdCart());
         return "redirect:/shop";
     }
 
     /**
      * Removes an item from the authenticated user's cart.
      *
-     * @param index        The index of the item to remove from the cart.
-     * @param userDetails  The authenticated user's details.
+     * @param index       The index of the item to remove from the cart.
+     * @param userDetails The authenticated user's details.
      * @return Redirects to the cart page.
      */
     @GetMapping("/cart/removeItem/{index}")
     public String removeItem(@PathVariable int index, @AuthenticationPrincipal UserDetails userDetails) {
         User user = userService.findUserByEmail(userDetails.getUsername());
-        cartService.removeProductFromCartById(index, user.cart.getIdCart());
+        cartService.removeProductFromCartById(index, user.getCart().getIdCart());
         return "redirect:/cart";
     }
 }

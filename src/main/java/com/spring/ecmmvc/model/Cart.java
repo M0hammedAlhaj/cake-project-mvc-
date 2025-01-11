@@ -19,7 +19,7 @@ public class Cart {
     @Column(name = "id")
     private Integer idCart;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "cart_product", // Join table name
             joinColumns = @JoinColumn(name = "id_cart"), // Foreign key to Cart
